@@ -14,12 +14,28 @@ public class ControladorTiempo implements ActionListener {
 
 	public ControladorTiempo(VistaTiempo vista) {
 		this.vista = vista;
+		vista.btnClimaEspania.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		if(vista.btnClimaEspania == e.getSource()) {
+			
+		}
 		
+	}
+	
+	public void elegirClima (String clima) {
+		
+		switch (clima) {
+		case "Soleado":
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 	
 	
