@@ -1,6 +1,7 @@
 package Vista;
 
 import java.awt.EventQueue;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerModel;
 
 public class VistaTiempo extends JFrame {
 
@@ -24,11 +28,15 @@ public class VistaTiempo extends JFrame {
 	public JLabel lblNewLabel_1_3;
 	public JLabel lblFondoMapa;
 	public JButton btnClimaEspania;
+	public JComboBox comboDias;
+	public JLabel lblRetroalimentacion;
+	private String [] dias = {"Hoy","Mañana","En 2 dias","En 3 dias"};
 	private  String[] comunidadesAutonomas = {
             "Andalucía", "Aragón", "Asturias", "Islas Baleares", "Canarias", "Cantabria", "Castilla y León",
             "Castilla-La Mancha", "Cataluña", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", 
             "País Vasco", "La Rioja", "Comunidad Valenciana", "Ceuta", "Melilla"
         };
+	private JLabel lblNewLabel_3;
 
 	/**
 	 * Launch the application.
@@ -94,9 +102,9 @@ public class VistaTiempo extends JFrame {
 		lblNewLabel_1_3.setBounds(267, 113, 31, 31);
 		panelMapa.add(lblNewLabel_1_3);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 174, 116, 21);
-		panelMapa.add(comboBox);
+		JComboBox comboProvincias = new JComboBox();
+		comboProvincias.setBounds(10, 174, 116, 21);
+		panelMapa.add(comboProvincias);
 
 		lblFondoMapa = new JLabel("");
 		lblFondoMapa.setIcon(new ImageIcon("C:\\Users\\Luis Jesus\\git\\ElTiempo\\ElTiempo_Espania\\Imagenes\\spain_prov Buena.png"));
@@ -111,8 +119,27 @@ public class VistaTiempo extends JFrame {
 		lblNewLabel.setBounds(10, 151, 206, 13);
 		panelMapa.add(lblNewLabel);
 		
-		for(int i =0 ;i < comunidadesAutonomas.length;i++) {
-			comboBox.addItem(comunidadesAutonomas[i]);
+		lblRetroalimentacion = new JLabel("New label");
+		lblRetroalimentacion.setBounds(682, 418, 202, 249);
+		panelMapa.add(lblRetroalimentacion);
+		
+		comboDias = new JComboBox();
+		comboDias.setBounds(269, 0, 101, 21);
+		panelMapa.add(comboDias);
+		
+		lblNewLabel_3 = new JLabel("DIa:");
+		lblNewLabel_3.setBounds(214, 4, 45, 13);
+		panelMapa.add(lblNewLabel_3);
+		
+		for (int i = 0; i < dias.length; i++) {
+			comboDias.addItem(dias[i]);
 		}
+		
+		
+		for(int i =0 ;i < comunidadesAutonomas.length;i++) {
+			comboProvincias.addItem(comunidadesAutonomas[i]);
+		}
+		
+		
 	}
 }
