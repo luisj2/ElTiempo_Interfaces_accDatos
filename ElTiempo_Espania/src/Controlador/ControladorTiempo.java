@@ -181,8 +181,8 @@ public class ControladorTiempo implements ActionListener {
 	private void CambiarImagen(String clima, String ciudad) {
 
 		switch (ciudad) {
-		case "Lugo":
-
+		case "Madrid":
+			elegirClima(clima,vista.lblMadrid);
 			break;
 
 		default:
