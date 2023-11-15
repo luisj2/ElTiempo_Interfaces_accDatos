@@ -29,7 +29,7 @@ public class VistaTiempo extends JFrame {
             "Castilla-La Mancha", "Cataluña", "Extremadura", "Galicia", "Madrid", "Murcia", "Navarra", 
             "País Vasco", "La Rioja", "Comunidad Valenciana", "Ceuta", "Melilla"
         };
-	private JLabel lbl_Bilbao;
+	private JLabel lbl_Alava;
 	private JLabel lbl_Navarra;
 	private JLabel lbl_LaRioja;
 	private JLabel lbl_Huesca;
@@ -67,6 +67,11 @@ public class VistaTiempo extends JFrame {
 	private JLabel lbl_Sevilla;
 	private JLabel lbl_Cadiz;
 	private JLabel lbl_Huelva;
+	private JLabel lbl_Tenerife;
+	private JLabel lbl_GranCanaria;
+	private JLabel lbl_PalmaMallorca;
+	private JLabel lbl_Ceuta;
+	private JLabel lbl_Melilla;
 
 	/**
 	 * Launch the application.
@@ -132,9 +137,9 @@ public class VistaTiempo extends JFrame {
 		lbl_Cantabria.setBounds(430, 83, 31, 31);
 		panelMapa.add(lbl_Cantabria);
 		
-		lbl_Bilbao = new JLabel("");
-		lbl_Bilbao.setBounds(497, 111, 31, 31);
-		panelMapa.add(lbl_Bilbao);
+		lbl_Alava = new JLabel("");
+		lbl_Alava.setBounds(497, 111, 31, 31);
+		panelMapa.add(lbl_Alava);
 		
 		lbl_Navarra = new JLabel("");
 		lbl_Navarra.setBounds(541, 122, 31, 31);
@@ -283,6 +288,26 @@ public class VistaTiempo extends JFrame {
 		lbl_Huelva = new JLabel("");
 		lbl_Huelva.setBounds(287, 450, 31, 31);
 		panelMapa.add(lbl_Huelva);
+		
+		lbl_Tenerife = new JLabel("");
+		lbl_Tenerife.setBounds(96, 605, 31, 31);
+		panelMapa.add(lbl_Tenerife);
+		
+		lbl_GranCanaria = new JLabel("");
+		lbl_GranCanaria.setBounds(151, 627, 31, 31);
+		panelMapa.add(lbl_GranCanaria);
+		
+		lbl_PalmaMallorca = new JLabel("");
+		lbl_PalmaMallorca.setBounds(767, 318, 31, 31);
+		panelMapa.add(lbl_PalmaMallorca);
+		
+		lbl_Ceuta = new JLabel("");
+		lbl_Ceuta.setBounds(366, 559, 31, 31);
+		panelMapa.add(lbl_Ceuta);
+		
+		lbl_Melilla = new JLabel("");
+		lbl_Melilla.setBounds(483, 586, 31, 31);
+		panelMapa.add(lbl_Melilla);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(10, 174, 116, 21);
