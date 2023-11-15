@@ -1,5 +1,6 @@
 package Vista;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.Iterator;
 
@@ -20,7 +21,7 @@ public class VistaTiempo extends JFrame {
 	public JPanel contentPane;
 	public JPanel panelMapa;
 	public JLabel lbl_Madrid;
-	public JLabel lbl_ACoruña;
+	public JLabel lbl_ACorunia;
 	public JLabel lbl_Pontevedra;
 	public JLabel lbl_Lugo;
 	public JLabel lbl_Ourense;
@@ -117,6 +118,11 @@ public class VistaTiempo extends JFrame {
 		contentPane.add(panelMapa);
 		panelMapa.setLayout(null);
 		
+		lblRetroalimentacion = new JLabel("");
+		lblRetroalimentacion.setBounds(682, 418, 202, 249);
+		lblRetroalimentacion.setForeground(Color.RED);
+		panelMapa.add(lblRetroalimentacion);
+		
 		btnClimaEspania = new JButton("Ver Clima");
 		btnClimaEspania.setBounds(-1, 0, 127, 21);
 		panelMapa.add(btnClimaEspania);
@@ -125,9 +131,9 @@ public class VistaTiempo extends JFrame {
 		lbl_Madrid.setBounds(449, 271, 31, 31);
 		panelMapa.add(lbl_Madrid);
 
-		lbl_ACoruña = new JLabel("");
-		lbl_ACoruña.setBounds(221, 83, 31, 31);
-		panelMapa.add(lbl_ACoruña);
+		lbl_ACorunia = new JLabel("");
+		lbl_ACorunia.setBounds(221, 83, 31, 31);
+		panelMapa.add(lbl_ACorunia);
 
 		lbl_Pontevedra = new JLabel("");
 		lbl_Pontevedra.setBounds(208, 146, 31, 31);
@@ -337,10 +343,6 @@ public class VistaTiempo extends JFrame {
 		JLabel lblNewLabel = new JLabel("Selecciona la comunidad autonoma");
 		lblNewLabel.setBounds(10, 151, 206, 13);
 		panelMapa.add(lblNewLabel);
-		
-		lblRetroalimentacion = new JLabel("New label");
-		lblRetroalimentacion.setBounds(682, 418, 202, 249);
-		panelMapa.add(lblRetroalimentacion);
 		
 		comboDias = new JComboBox();
 		comboDias.setBounds(269, 0, 101, 21);
