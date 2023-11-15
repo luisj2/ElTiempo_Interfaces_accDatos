@@ -26,6 +26,16 @@ import Vista.VistaTiempo;
 
 public class ControladorTiempo implements ActionListener {
 
+
+
+	public String[] provincias = {
+			"Lugo", "Ourense", "ACorunia", "Pontevedra", "Oviedo", "Soria", "Burgos", "Segovia", "Palencia", "Valladolid", "Avila", "Leon",
+			"Zamora", "Salamanca", "Santander", "Alava", "Pamplona", "Logronio", "Huesca", "Zaragoza", "Teruel", "Lleida", "Girona", "Barcelona",
+			"Tarragona", "Madrid", "Caceres", "Badajoz", "Toledo", "Cuenca", "Guadalajara", "Albacete", "CiudadReal", "Valencia", "Castellon", 
+			"Alicante", "Murcia", "PalmaDeMayorca", "Tenerife", "Almeria", "Jaen", "Granada", "Cordoba", "Malaga", "Sevilla", "Cadiz", "Huelva", 
+			"Ceuta", "Melilla"
+	};
+	
 	VistaTiempo vista;
 
 	public ControladorTiempo(VistaTiempo vista) {
@@ -182,7 +192,7 @@ public class ControladorTiempo implements ActionListener {
 
 		switch (ciudad) {
 		case "Madrid":
-			elegirClima(clima,vista.lblMadrid);
+			elegirClima(clima,vista.lbl_Madrid);
 			break;
 
 		default:
