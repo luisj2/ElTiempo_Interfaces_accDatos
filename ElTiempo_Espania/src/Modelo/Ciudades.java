@@ -4,10 +4,14 @@ import java.util.List;
 
 public class Ciudades {
 
-	List <Ciudad> ciudades;
+	private List <Ciudad> ciudades;
+
+	public Ciudades() {
+		super();
+	}
 
 	public Ciudades(List<Ciudad> ciudades) {
-		//super();
+		super();
 		this.ciudades = ciudades;
 	}
 
@@ -23,7 +27,6 @@ public class Ciudades {
 	public String toString() {
 		return "Ciudades [ciudades=" + ciudades + "]";
 	}
-	
 	
 	
 }

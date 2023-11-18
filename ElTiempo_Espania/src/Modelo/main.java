@@ -1,9 +1,6 @@
-package Controlador;
+package Modelo;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,7 +13,6 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -24,58 +20,36 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import Modelo.Ciudad;
-import Vista.VistaTiempo;
+public class main {
 
-public class ControladorTiempo implements ActionListener {
+	public static void main(String[] args) {
 
-	public String[] provincias = { "Lugo", "Ourense", "ACorunia", "Pontevedra", "Oviedo", "Soria", "Burgos", "Segovia",
-			"Palencia", "Valladolid", "Avila", "Leon", "Zamora", "Salamanca", "Santander", "Alava", "Pamplona",
-			"Logronio", "Huesca", "Zaragoza", "Teruel", "Lleida", "Girona", "Barcelona", "Tarragona", "Madrid",
-			"Caceres", "Badajoz", "Toledo", "Cuenca", "Guadalajara", "Albacete", "CiudadReal", "Valencia", "Castellon",
-			"Alicante", "Murcia", "PalmaDeMayorca", "Tenerife", "Almeria", "Jaen", "Granada", "Cordoba", "Malaga",
-			"Sevilla", "Cadiz", "Huelva", "Ceuta", "Melilla" };
-
-	VistaTiempo vista;
-
-	public ControladorTiempo(VistaTiempo frame) {
-		this.vista = frame;
-		vista.btnClimaEspania.addActionListener(this);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == vista.btnClimaEspania) {
-
-			accederValorPorperties();
-
-		}
+		accederValorPorperties();
 
 	}
 
-	public void elegirClima(String clima, JLabel label) {
+	public static void elegirClima(String clima) {
 
 		switch (clima) {
 		case "Soleado":
-			label.setIcon(new ImageIcon("Imagenes/sol Buena.png"));
+			System.out.println("Se ha cambiado el clima a Soleado");
 			break;
 		case "Periodos de sol":
-			label.setIcon(new ImageIcon("Imagenes/Nubes bueno.png"));
+			System.out.println("Se ha cambiado el clima a nublado");
 			break;
 		case "Chubascos debiles":
-			label.setIcon(new ImageIcon("Images/lluvia_buena.png"));
+			System.out.println("Se ha cambiado el clima a lluvioso");
 			break;
 
 		case "Chubascos":
-			label.setIcon(new ImageIcon("Images/lluvia-muy-fuerte_buena.png"));
+			System.out.println("Se ha cambiado el clima a lluvia");
 			break;
 
 		}
 
 	}
 
-	public void accederValorPorperties() {
+	public static void accederValorPorperties() {
 		Properties configuracion = null;
 		InputStream entrada = null;
 		String link = "";
@@ -87,9 +61,8 @@ public class ControladorTiempo implements ActionListener {
 			// entrada = new FileInputStream("config.properties");
 
 			Set<String> ciudades = configuracion.stringPropertyNames();
-			
+
 			Gson gson = new Gson();
-			
 
 			// for (String ciudad : ciudades) {
 			link = configuracion.getProperty("Madrid");
@@ -114,45 +87,57 @@ public class ControladorTiempo implements ActionListener {
 					while ((linea = lector.readLine()) != null) {
 						respuesta += linea;
 					}
+					
+					String [] array = respuesta.split(",");
+					
+					for (int i = 0; i < array.length; i++) {
+						System.out.println(array[i]);
+					}
+					
+					
 
 					lector.close();
 					
-					Ciudad c = gson.fromJson(respuesta, Ciudad.class);
-
-					// el String qu etiene toda el contenido de la pagina
-
-					// Crear un objeto JsonParser
+					System.out.println(respuesta);
 					/*
-					JsonParser jsonParser = new JsonParser();
-
-					// Convertir el JSON a un objeto JsonObject
-					JsonObject jsonObject = jsonParser.parse(respuesta).getAsJsonObject();
-
-					// Obtener los Datos
-					String fecha = jsonObject.getAsJsonPrimitive("forecastDate").getAsString();
-					String clima = jsonObject.getAsJsonPrimitive("weather").getAsString();
-					String maxTemp = jsonObject.getAsJsonPrimitive("maxTemp").getAsString();
-					String minTemp = jsonObject.getAsJsonPrimitive("minTemp").getAsString();
+					 * 
+					 * Ciudad c = gson.fromJson(respuesta, Ciudad.class);
+					 * 
+					 * // el String qu etiene toda el contenido de la pagina
+					 * 
+					 * // Crear un objeto JsonParser
+					 * 
+					 * JsonParser jsonParser = new JsonParser();
+					 * 
+					 * // Convertir el JSON a un objeto JsonObject JsonObject jsonObject =
+					 * jsonParser.parse(respuesta).getAsJsonObject();
+					 * 
+					 * // Obtener los Datos String fecha =
+					 * jsonObject.getAsJsonPrimitive("forecastDate").getAsString(); String clima =
+					 * jsonObject.getAsJsonPrimitive("weather").getAsString(); String maxTemp =
+					 * jsonObject.getAsJsonPrimitive("maxTemp").getAsString(); String minTemp =
+					 * jsonObject.getAsJsonPrimitive("minTemp").getAsString();
+					 * 
+					 * 
+					 */
 					
 
-					vista.lblRetroalimentacion.setText(
-							"fecha:" + fecha + " clima:" + clima + " maxTemp:" + maxTemp + " minTemp:" + minTemp);
 					// comprobar que las fechas son del dia indicado
-					 * */
-					 
-					//String fechaEs = deCuandoFecha(fecha);
+
+					// String fechaEs = deCuandoFecha(fecha);
 					// comparamos del dia que es el objeto que hemos sacado con el dia que hay
 					// introducido
 					// if (fechaEs.equalsIgnoreCase(vista.comboDias.toString())) {
-					vista.lblRetroalimentacion.setText(
-							"fecha:" + c.getFecha() + " clima:" + c.getClima() + " maxTemp:" + c.getTempMax() + " minTemp:" + c.getTempMin());
-					CambiarImagen(c.getClima(), c.getCiudad());
+					// vista.lblRetroalimentacion.setText(
+					// "fecha:" + c.getFecha() + " clima:" + c.getClima() + " maxTemp:" +
+					// c.getTempMax() + " minTemp:" + c.getTempMin());
+				//	CambiarImagen(clima, "Madrid");
 
 				} else {
-					vista.lblRetroalimentacion.setText("Error en la solicitud. Código de respuesta:" + codigoRespuesta);
+					System.out.println("Error en la solicitud. Código de respuesta:" + codigoRespuesta);
 				}
 			} else {
-				vista.lblRetroalimentacion.setText("El link es null");
+				System.out.println("El link es null");
 			}
 			// }
 
@@ -213,158 +198,157 @@ public class ControladorTiempo implements ActionListener {
 	}
 
 	// cambiar label segun el tiempo
-	private void CambiarImagen(String clima, String ciudad) {
+	private static void CambiarImagen(String clima, String ciudad) {
 
 		switch (ciudad) {
 		case "Lugo":
-			elegirClima(clima, vista.lbl_Lugo);
+			System.out.println("El clima de Lugo es: " + clima);
 			break;
 		case "Ourense":
-			elegirClima(clima, vista.lbl_Ourense);
+			System.out.println("El clima de Ourense es: " + clima);
 			break;
 		case "ACorunia":
-			elegirClima(clima, vista.lbl_ACorunia);
+			System.out.println("El clima de A Coruña es: " + clima);
 			break;
 		case "Pontevedra":
-			elegirClima(clima, vista.lbl_Pontevedra);
+			System.out.println("El clima de Pontevedra es: " + clima);
 			break;
 		case "Oviedo":
-			// elegirClima(clima, vista.lbl_Oviedo);
+			System.out.println("El clima de Oviedo es: " + clima);
 			break;
 		case "Soria":
-			elegirClima(clima, vista.lbl_Soria);
+			System.out.println("El clima de Soria es: " + clima);
 			break;
 		case "Burgos":
-			elegirClima(clima, vista.lbl_Burgos);
+			System.out.println("El clima de Burgos es: " + clima);
 			break;
 		case "Segovia":
-			elegirClima(clima, vista.lbl_Segovia);
+			System.out.println("El clima de Segovia es: " + clima);
 			break;
 		case "Palencia":
-			elegirClima(clima, vista.lbl_Palencia);
+			System.out.println("El clima de Palencia es: " + clima);
 			break;
 		case "Valladolid":
-			elegirClima(clima, vista.lbl_Valladolid);
+			System.out.println("El clima de Valladolid es: " + clima);
 			break;
 		case "Avila":
-			elegirClima(clima, vista.lbl_Avila);
+			System.out.println("El clima de Avila es: " + clima);
 			break;
 		case "Leon":
-			elegirClima(clima, vista.lbl_Leon);
+			System.out.println("El clima de Leon es: " + clima);
 			break;
 		case "Zamora":
-			elegirClima(clima, vista.lbl_Zamora);
+			System.out.println("El clima de Zamora es: " + clima);
 			break;
 		case "Salamanca":
-			elegirClima(clima, vista.lbl_Salamanca);
+			System.out.println("El clima de Salamanca es: " + clima);
 			break;
 		case "Santander":
-			// elegirClima(clima, vista.lbl_Santander);
+			System.out.println("El clima de Santander es: " + clima);
 			break;
 		case "Alava":
-			elegirClima(clima, vista.lbl_Alava);
+			System.out.println("El clima de Alava es: " + clima);
 			break;
 		case "Pamplona":
-			// elegirClima(clima, vista.lbl_Pamplona);
+			System.out.println("El clima de Pamplona es: " + clima);
 			break;
 		case "Logronio":
-			// elegirClima(clima, vista.lbl_Logronio);
+			System.out.println("El clima de Logroño es: " + clima);
 			break;
 		case "Huesca":
-			elegirClima(clima, vista.lbl_Huesca);
+			System.out.println("El clima de Huesca es: " + clima);
 			break;
 		case "Zaragoza":
-			elegirClima(clima, vista.lbl_Zaragoza);
+			System.out.println("El clima de Zaragoza es: " + clima);
 			break;
 		case "Teruel":
-			elegirClima(clima, vista.lbl_Teruel);
+			System.out.println("El clima de Teruel es: " + clima);
 			break;
 		case "Lleida":
-			elegirClima(clima, vista.lbl_Lleida);
+			System.out.println("El clima de Lleida es: " + clima);
 			break;
 		case "Girona":
-			elegirClima(clima, vista.lbl_Girona);
+			System.out.println("El clima de Girona es: " + clima);
 			break;
 		case "Barcelona":
-			elegirClima(clima, vista.lbl_Barcelona);
+			System.out.println("El clima de Barcelona es: " + clima);
 			break;
 		case "Tarragona":
-			elegirClima(clima, vista.lbl_Tarragona);
+			System.out.println("El clima de Tarragona es: " + clima);
 			break;
 		case "Madrid":
-			elegirClima(clima, vista.lbl_Madrid);
+			System.out.println("El clima de Madrid es: " + clima);
 			break;
 		case "Caceres":
-			elegirClima(clima, vista.lbl_Caceres);
+			System.out.println("El clima de Caceres es: " + clima);
 			break;
 		case "Badajoz":
-			elegirClima(clima, vista.lbl_Badajoz);
+			System.out.println("El clima de Badajoz es: " + clima);
 			break;
 		case "Toledo":
-			elegirClima(clima, vista.lbl_Toledo);
+			System.out.println("El clima de Toledo es: " + clima);
 			break;
 		case "Cuenca":
-			elegirClima(clima, vista.lbl_Cuenca);
+			System.out.println("El clima de Cuenca es: " + clima);
 			break;
 		case "Guadalajara":
-			elegirClima(clima, vista.lbl_Guadalajara);
+			System.out.println("El clima de Guadalajara es: " + clima);
 			break;
 		case "Albacete":
-			elegirClima(clima, vista.lbl_Albacete);
+			System.out.println("El clima de Albacete es: " + clima);
 			break;
 		case "CiudadReal":
-			elegirClima(clima, vista.lbl_CiudadReal);
+			System.out.println("El clima de Ciudad Real es: " + clima);
 			break;
 		case "Valencia":
-			elegirClima(clima, vista.lbl_Valencia);
+			System.out.println("El clima de Valencia es: " + clima);
 			break;
 		case "Castellon":
-			elegirClima(clima, vista.lbl_Castellon);
+			System.out.println("El clima de Castellon es: " + clima);
 			break;
 		case "Alicante":
-			elegirClima(clima, vista.lbl_Alicante);
+			System.out.println("El clima de Alicante es: " + clima);
 			break;
 		case "Murcia":
-			elegirClima(clima, vista.lbl_Murcia);
+			System.out.println("El clima de Murcia es: " + clima);
 			break;
 		case "PalmaDeMayorca":
-			elegirClima(clima, vista.lbl_PalmaMallorca);
+			System.out.println("El clima de Palma de Mallorca es: " + clima);
 			break;
 		case "Tenerife":
-			elegirClima(clima, vista.lbl_Tenerife);
+			System.out.println("El clima de Tenerife es: " + clima);
 			break;
 		case "Almeria":
-			elegirClima(clima, vista.lbl_Almeria);
+			System.out.println("El clima de Almeria es: " + clima);
 			break;
 		case "Jaen":
-			elegirClima(clima, vista.lbl_Jaen);
+			System.out.println("El clima de Jaen es: " + clima);
 			break;
 		case "Granada":
-			elegirClima(clima, vista.lbl_Granada);
+			System.out.println("El clima de Granada es: " + clima);
 			break;
 		case "Cordoba":
-			elegirClima(clima, vista.lbl_Cordoba);
+			System.out.println("El clima de Córdoba es: " + clima);
 			break;
 		case "Malaga":
-			elegirClima(clima, vista.lbl_Malaga);
+			System.out.println("El clima de Málaga es: " + clima);
 			break;
 		case "Sevilla":
-			elegirClima(clima, vista.lbl_Sevilla);
+			System.out.println("El clima de Sevilla es: " + clima);
 			break;
 		case "Cadiz":
-			elegirClima(clima, vista.lbl_Cadiz);
+			System.out.println("El clima de Cádiz es: " + clima);
 			break;
 		case "Huelva":
-			elegirClima(clima, vista.lbl_Huelva);
+			System.out.println("El clima de Huelva es: " + clima);
 			break;
 		case "Ceuta":
-			elegirClima(clima, vista.lbl_Ceuta);
+			System.out.println("El clima de Ceuta es: " + clima);
 			break;
 		case "Melilla":
-			elegirClima(clima, vista.lbl_Melilla);
+			System.out.println("El clima de Melilla es: " + clima);
 			break;
 		default:
-
 			break;
 		}
 
